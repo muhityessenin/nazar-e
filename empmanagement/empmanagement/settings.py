@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'empmanagement.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'emp',
-        'USER': 'postgres',
-        'PASSWORD': 'muhit9845',
-        'HOST': 'localhost',
+        'NAME': 'nazar_coins',
+        'USER': 'muhit',
+        'PASSWORD': 'CAaOnHczSIzx4q6G3Uon96e6tvyPw2eI',
+        'HOST': 'dpg-cv072itsvqrc73ais8sg-a.oregon-postgres.render.com',
     }
 }
 
