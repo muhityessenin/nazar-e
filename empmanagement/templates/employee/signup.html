@@ -1,16 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet"> -->
     <link
         href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Raleway:wght@100&family=Ubuntu:wght@300&display=swap"
         rel="stylesheet">
-    <title>SignUp</title>
+    <title>Регистрация</title>
     <style>
         body {
             background-color: whitesmoke;
@@ -28,7 +27,6 @@
             border: none;
             margin-left: 25%;
             align-items: center;
-
         }
 
         .imgs {
@@ -37,19 +35,15 @@
             background-color: white;
             border: none;
             align-self: flex-start;
-
         }
 
         .login-form {
             padding-top: 15vh;
             height: 58vh;
-
             width: 45vw;
             background-color: white;
             align-self: flex-end;
             border: none;
-            font-family: 'Lobster Two', cursive;
-            font-family: 'Raleway', sans-serif;
             font-family: 'Ubuntu', sans-serif;
             color: black;
         }
@@ -76,26 +70,23 @@
             color: white;
             border-radius: 0.5vh;
         }
-        a
-        {
+
+        a {
             text-decoration: none;
             font-size: small;
         }
-        img
-        {
+
+        img {
             padding-top: 17vh;
-            height:50%;
-
+            height: 50%;
         }
-        .err_message
-        {
 
-            color:red;
+        .err_message {
+            color: red;
         }
-        .success_message
-        {
 
-            color:green;
+        .success_message {
+            color: green;
         }
     </style>
 
@@ -106,28 +97,28 @@
     <div class="login">
         <div class="imgs"><img src="{% static 'assets/welcome.webp' %}"></div>
         <div class="login-form">
-            SIGN UP
+            РЕГИСТРАЦИЯ
 <form action="" method="post">
     {% csrf_token %}
     <table>
         <tr>
-            <td>Id</td>
+            <td>ID</td>
             <td><input type="text" name="id" required></td>
         </tr>
         <tr>
-            <td>First Name</td>
+            <td>Имя</td>
             <td><input type="text" name="firstName" required></td>
         </tr>
         <tr>
-            <td>Middle Name</td>
+            <td>Отчество</td>
             <td><input type="text" name="middleName"></td>
         </tr>
         <tr>
-            <td>Last Name</td>
+            <td>Фамилия</td>
             <td><input type="text" name="lastName" required></td>
         </tr>
         <tr>
-            <td>Phone Number</td>
+            <td>Номер телефона</td>
             <td><input type="text" name="phoneNo" required></td>
         </tr>
         <tr>
@@ -135,44 +126,44 @@
             <td><input type="email" name="email" required></td>
         </tr>
         <tr>
-            <td>Addhar Number</td>
+            <td>Номер Aadhaar</td>
             <td><input type="text" name="addharNo" required></td>
         </tr>
         <tr>
-            <td>Date of Birth</td>
+            <td>Дата рождения</td>
             <td><input type="date" name="dOB" required></td>
         </tr>
         <tr>
-            <td>Designation</td>
+            <td>Должность</td>
             <td>
                 <select name="designation" required>
-                    <option value="Team Leader">Team Leader</option>
-                    <option value="Project Manager">Project Manager</option>
-                    <option value="Senior Developer">Senior Developer</option>
-                    <option value="Junior Developer">Junior Developer</option>
-                    <option value="Intern">Intern</option>
-                    <option value="QA Tester">QA Tester</option>
+                    <option value="Team Leader">Руководитель команды</option>
+                    <option value="Project Manager">Менеджер проекта</option>
+                    <option value="Senior Developer">Старший разработчик</option>
+                    <option value="Junior Developer">Младший разработчик</option>
+                    <option value="Intern">Стажёр</option>
+                    <option value="QA Tester">Тестировщик</option>
                 </select>
             </td>
         </tr>
         <tr>
-            <td>Salary</td>
+            <td>Зарплата</td>
             <td><input type="text" name="salary" required></td>
         </tr>
         <tr>
-            <td>Join Date</td>
+            <td>Дата начала работы</td>
             <td><input type="date" name="joinDate" required></td>
         </tr>
         <tr>
-            <td>Password</td>
+            <td>Пароль</td>
             <td><input type="password" name="password" required></td>
         </tr>
         <tr>
-            <td>Confirm Password</td>
+            <td>Подтвердите пароль</td>
             <td><input type="password" name="cnfpass" required></td>
         </tr>
     </table>
-    <input type="submit" value="Sign Up">
+    <input type="submit" value="Зарегистрироваться">
     <br><br>
     {% for msg in messages %}
         {% if msg == "Registered Successfully" %}
@@ -186,7 +177,5 @@
         </div>
     </div>
 
-
 </body>
-
 </html>

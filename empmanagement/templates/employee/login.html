@@ -1,16 +1,15 @@
 {% load static%}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet"> -->
     <link
         href="https://fonts.googleapis.com/css2?family=Lobster+Two&family=Raleway:wght@100&family=Ubuntu:wght@300&display=swap"
         rel="stylesheet">
-    <title>Login</title>
+    <title>Вход</title>
     <style>
         body {
             background-color: whitesmoke;
@@ -28,7 +27,6 @@
             border: none;
             margin-left: 25%;
             align-items: center;
-
         }
 
         .imgs {
@@ -37,19 +35,15 @@
             background-color: white;
             border: none;
             align-self: flex-start;
-
         }
 
         .login-form {
             padding-top: 15vh;
             height: 50vh;
-
             width: 45vw;
             background-color: white;
             align-self: flex-end;
             border: none;
-            font-family: 'Lobster Two', cursive;
-            font-family: 'Raleway', sans-serif;
             font-family: 'Ubuntu', sans-serif;
             color: black;
         }
@@ -76,21 +70,21 @@
             color: white;
             border-radius: 0.5vh;
         }
-        a
-        {
+
+        a {
             text-decoration: none;
             font-size: small;
         }
-        img
-        {
+
+        img {
             padding-top: 15vh;
             padding-left: 2vw;
-            width:80%;
+            width: 80%;
             height: 50%;
         }
-        .err_message
-        {
-            color:red;
+
+        .err_message {
+            color: red;
         }
     </style>
 
@@ -101,31 +95,30 @@
     <div class="login">
         <div class="imgs"><img src="{% static 'assets/Team.jpg' %}"></div>
         <div class="login-form">
-            LOGIN
+            ВХОД
             <form action="" method="post">
                 {% csrf_token %}
                 <table>
                     <tr>
-                        <td>Id</td>
+                        <td>ID</td>
                     </tr>
                     <tr>
                         <td><input type="text" name="id" required></td><br>
                     </tr>
                     <tr class="pass">
-                        <td><br>Password</td>
+                        <td><br>Пароль</td>
                     </tr>
                     <tr>
                         <td><input type="password" name="password" required></td><br>
                     </tr>
                 </table>
-                <input type="submit" value="Login"><br><br>
-                <a href="signup">New Employee</a><br><br>
+                <input type="submit" value="Войти"><br><br>
+                <a href="signup">Новый сотрудник</a><br><br>
                 <div class="err_message">
                     {% for msg in messages %}
-                        {{ msg }}        
+                        {{ msg }}
                     {% endfor %}
                 </div>
-                
             </form>
         </div>
     </div>

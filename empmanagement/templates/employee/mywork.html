@@ -1,10 +1,9 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
 <section class="home">
     <div class="text">
-        My Work 
+        Мои Задания
     </div>
     <div class="max-w-xl mx-auto">
       <div
@@ -12,7 +11,7 @@
          >
       <div class="flex justify-between items-center mb-4">
          <h3 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-            Works
+            Задания
          </h3>
       </div>
       <div class="flow-root">
@@ -21,26 +20,26 @@
       <div class="flex items-center space-x-4">
          <div class="flex-1 min-w-0">
             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-               Assigned By: <b>{{info.assignerId}}</b>
+               Назначено: <b>{{info.assignerId}}</b>
             </p>
          </div>
       </div>
-      Assigned Date: {{info.assignDate}}<br>
-      Due Date: {{info.dueDate}}<br>
+      Дата назначения: {{info.assignDate}}<br>
+      Срок выполнения: {{info.dueDate}}<br>
       <div style="overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 1; /* number of lines to show */
+      -webkit-line-clamp: 1;
               line-clamp: 1; 
       -webkit-box-orient: vertical;">
-      <b>Work Details : </b> {{info.work}}<br>
+      <b>Описание задания: </b> {{info.work}}<br>
    </div>
-      <a style="color:blueviolet;" href = "{% url 'workdetails' wid=info.id %}">View Details</a>
+      <a style="color:blueviolet;" href = "{% url 'workdetails' wid=info.id %}">Подробнее</a>
         {% if not info.isDone %}
-    <a href="{% url 'mark_done' info.id %}" class="text-green-600 underline ml-4">Mark as Done</a>
-{% else %}
-    <span class="text-gray-500 ml-4">(Completed)</span>
-{% endif %}
+            <a href="{% url 'mark_done' info.id %}" class="text-green-600 underline ml-4">Отметить как выполнено</a>
+        {% else %}
+            <span class="text-gray-500 ml-4">(Выполнено)</span>
+        {% endif %}
       <br>
       <div style="height: 2px; width: 500; background-color: black; border-radius: 10px; margin:10px 0px;"></div>
 
