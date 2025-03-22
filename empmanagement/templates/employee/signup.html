@@ -13,169 +13,191 @@
     <style>
         body {
             background-color: whitesmoke;
-            box-sizing: border-box;
+            font-family: 'Ubuntu', sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .login {
-            box-shadow: -2px 5px 30px 0.5px rgb(168, 168, 168);
-            border-radius: 5%;
-            width: 50%;
-            margin-top: 7%;
             display: flex;
             flex-direction: row;
-            align-items: center;
-            border: none;
-            margin-left: 25%;
-            align-items: center;
+            justify-content: center;
+            align-items: stretch;
+            background-color: white;
+            max-width: 1000px;
+            margin: 50px auto;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .imgs {
-            height: 73vh;
-            width: 45vw;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background-color: white;
-            border: none;
-            align-self: flex-start;
+            padding: 40px;
+        }
+
+        .imgs img {
+            max-width: 100%;
+            height: auto;
         }
 
         .login-form {
-            padding-top: 15vh;
-            height: 58vh;
-            width: 45vw;
+            flex: 1;
+            padding: 40px;
             background-color: white;
-            align-self: flex-end;
-            border: none;
-            font-family: 'Ubuntu', sans-serif;
             color: black;
         }
 
-        table {
-            padding-top: 0vh;
+        .login-form h2 {
+            margin-bottom: 20px;
         }
 
-        tr {
-            line-height: 3vh;
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 8px;
+            vertical-align: middle;
         }
 
         input[type=text],
-        input[type=password] {
-            border: none;
-            border-bottom: 0.5px solid black;
+        input[type=password],
+        input[type=email],
+        input[type=date],
+        select {
+            width: 100%;
+            padding: 6px 10px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
         }
 
         input[type=submit] {
-            margin-top: 5vh;
-            padding: 1vh 2vh;
+            margin-top: 20px;
+            padding: 10px 20px;
             background-color: rgb(52, 152, 219);
             border: none;
             color: white;
-            border-radius: 0.5vh;
-        }
-
-        a {
-            text-decoration: none;
-            font-size: small;
-        }
-
-        img {
-            padding-top: 17vh;
-            height: 50%;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .err_message {
             color: red;
+            margin-top: 10px;
         }
 
         .success_message {
             color: green;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .login {
+                flex-direction: column;
+            }
+
+            .imgs, .login-form {
+                width: 100%;
+            }
         }
     </style>
-
 </head>
 
 <body>
-
     <div class="login">
-        <div class="imgs"><img src="{% static 'assets/welcome.webp' %}"></div>
+        <div class="imgs">
+            <img src="{% static 'assets/welcome.webp' %}" alt="Welcome">
+        </div>
         <div class="login-form">
-            РЕГИСТРАЦИЯ
-<form action="" method="post">
-    {% csrf_token %}
-    <table>
-        <tr>
-            <td>ID</td>
-            <td><input type="text" name="id" required></td>
-        </tr>
-        <tr>
-            <td>Имя</td>
-            <td><input type="text" name="firstName" required></td>
-        </tr>
-        <tr>
-            <td>Отчество</td>
-            <td><input type="text" name="middleName"></td>
-        </tr>
-        <tr>
-            <td>Фамилия</td>
-            <td><input type="text" name="lastName" required></td>
-        </tr>
-        <tr>
-            <td>Номер телефона</td>
-            <td><input type="text" name="phoneNo" required></td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td><input type="email" name="email" required></td>
-        </tr>
-        <tr>
-            <td>Номер Aadhaar</td>
-            <td><input type="text" name="addharNo" required></td>
-        </tr>
-        <tr>
-            <td>Дата рождения</td>
-            <td><input type="date" name="dOB" required></td>
-        </tr>
-        <tr>
-            <td>Должность</td>
-            <td>
-                <select name="designation" required>
-                    <option value="Team Leader">Руководитель команды</option>
-                    <option value="Project Manager">Менеджер проекта</option>
-                    <option value="Senior Developer">Старший разработчик</option>
-                    <option value="Junior Developer">Младший разработчик</option>
-                    <option value="Intern">Стажёр</option>
-                    <option value="QA Tester">Тестировщик</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>Зарплата</td>
-            <td><input type="text" name="salary" required></td>
-        </tr>
-        <tr>
-            <td>Дата начала работы</td>
-            <td><input type="date" name="joinDate" required></td>
-        </tr>
-        <tr>
-            <td>Пароль</td>
-            <td><input type="password" name="password" required></td>
-        </tr>
-        <tr>
-            <td>Подтвердите пароль</td>
-            <td><input type="password" name="cnfpass" required></td>
-        </tr>
-    </table>
-    <input type="submit" value="Зарегистрироваться">
-    <br><br>
-    {% for msg in messages %}
-        {% if msg == "Registered Successfully" %}
-            <div class="success_message">{{ msg }}</div>
-        {% else %}
-            <div class="err_message">{{ msg }}</div>
-        {% endif %}
-    {% endfor %}
-</form>
-
+            <h2>РЕГИСТРАЦИЯ</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>ID</td>
+                        <td><input type="text" name="id" required></td>
+                    </tr>
+                    <tr>
+                        <td>Имя</td>
+                        <td><input type="text" name="firstName" required></td>
+                    </tr>
+                    <tr>
+                        <td>Отчество</td>
+                        <td><input type="text" name="middleName"></td>
+                    </tr>
+                    <tr>
+                        <td>Фамилия</td>
+                        <td><input type="text" name="lastName" required></td>
+                    </tr>
+                    <tr>
+                        <td>Номер телефона</td>
+                        <td><input type="text" name="phoneNo" required></td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td><input type="email" name="email" required></td>
+                    </tr>
+                    <tr>
+                        <td>Дата рождения</td>
+                        <td><input type="date" name="dOB" required></td>
+                    </tr>
+                    <tr>
+                        <td>Должность</td>
+                        <td>
+                            <select name="designation" required>
+                                <option value="Менеджер">Менеджер</option>
+                                <option value="РОП">РОП</option>
+                                <option value="ДОП">ДОП</option>
+                                <option value="Админ">Админ</option>
+                                <option value="SMM">SMM</option>
+                                <option value="Проджект менеджер">Проджект менеджер</option>
+                                <option value="Маркетолог">Маркетолог</option>
+                                <option value="Видеограф">Видеограф</option>
+                                <option value="HR">HR</option>
+                                <option value="Учитель">Учитель</option>
+                                <option value="МЗК">МЗК</option>
+                                <option value="Таргетолог">Таргетолог</option>
+                                <option value="Финансист">Финансист</option>
+                                <option value="Ассистент">Ассистент</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Зарплата</td>
+                        <td><input type="text" name="salary" required></td>
+                    </tr>
+                    <tr>
+                        <td>Дата начала работы</td>
+                        <td><input type="date" name="joinDate" required></td>
+                    </tr>
+                    <tr>
+                        <td>Пароль</td>
+                        <td><input type="password" name="password" required></td>
+                    </tr>
+                    <tr>
+                        <td>Подтвердите пароль</td>
+                        <td><input type="password" name="cnfpass" required></td>
+                    </tr>
+                </table>
+                <input type="submit" value="Зарегистрироваться">
+                <br><br>
+                {% for msg in messages %}
+                    {% if msg == "Registered Successfully" %}
+                        <div class="success_message">{{ msg }}</div>
+                    {% else %}
+                        <div class="err_message">{{ msg }}</div>
+                    {% endif %}
+                {% endfor %}
+            </form>
         </div>
     </div>
-
 </body>
 </html>
