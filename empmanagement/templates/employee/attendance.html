@@ -3,7 +3,7 @@
 {% block content %}
 <section class="home">
     <div class="text">
-        Your Attendance
+        Ваша Посещаемость
             <form  method="post">
                 {% csrf_token %}
                 <div class="flex flex-col">
@@ -14,10 +14,10 @@
                             <thead class="bg-white border-b">
                               <tr>
                                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                  <div class="text" style="font-size: 18px; padding:5px 0px; color:black;">Month</div>
+                                  <div class="text" style="font-size: 18px; padding:5px 0px; color:black;">Месяц</div>
                                 </th>
                                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                    <div class="text" style="font-size: 18px; padding:5px 0px; color:black;">Days</div>
+                                    <div class="text" style="font-size: 18px; padding:5px 0px; color:black;">Дни</div>
                                 </th>
                               </tr>
                             </thead>
@@ -31,17 +31,18 @@
                                         {{info.days}}
                                     </td>
                                   </tr>
-                                
+
                                  {% endfor %}
-                              
+
                             </tbody>
                           </table>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                    
-            </form>     
+
+
+            </form>
+    </div>
 </section>
 {% endblock %}

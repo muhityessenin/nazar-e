@@ -36,8 +36,14 @@
       <b>Work Details : </b> {{info.work}}<br>
    </div>
       <a style="color:blueviolet;" href = "{% url 'workdetails' wid=info.id %}">View Details</a>
+        {% if not info.isDone %}
+    <a href="{% url 'mark_done' info.id %}" class="text-green-600 underline ml-4">Mark as Done</a>
+{% else %}
+    <span class="text-gray-500 ml-4">(Completed)</span>
+{% endif %}
       <br>
       <div style="height: 2px; width: 500; background-color: black; border-radius: 10px; margin:10px 0px;"></div>
+
       {% endfor %}
     
 </section>

@@ -1,4 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
+
+from .decorators import only_director
 from .forms import *
 from employee.models import Employee,Attendance,Notice,workAssignments
 from django.contrib import messages
@@ -7,9 +9,59 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url='/')
 def dashboard(request):
-    info = Employee.objects.filter(eID=request.user.username)
-    return render(request,"employee/index.html",{'info':info})
-    
+    current_id = request.user.username
+
+    # Если директор — отправляем на отдельный шаблон
+    if current_id == "123123":  # eID директора
+        query = request.GET.get('q', '')
+        if query:
+            employees = Employee.objects.filter(
+                Q(firstName__icontains=query) |
+                Q(lastName__icontains=query) |
+                Q(middleName__icontains=query) |
+                Q(designation__icontains=query)
+            )
+        else:
+            employees = Employee.objects.all()
+
+        # считаем задачи по каждому сотруднику
+        employees_with_tasks = []
+        for emp in employees:
+            assigned = workAssignments.objects.filter(taskerId=emp).count()
+            done = workAssignments.objects.filter(taskerId=emp, isDone=True).count()
+            employees_with_tasks.append({
+                "employee": emp,
+                "assigned": assigned,
+                "done": done
+            })
+
+        return render(request, "employee/director_dashboard.html", {
+            "employees": employees_with_tasks,
+            "query": query
+        })
+
+    # Обычный сотрудник
+    info = Employee.objects.filter(eID=current_id)
+    assigned_tasks = workAssignments.objects.filter(taskerId__eID=current_id).count()
+    completed_tasks = workAssignments.objects.filter(taskerId__eID=current_id, isDone=True).count()
+
+    return render(request, "employee/index.html", {
+        'info': info,
+        'assigned_count': assigned_tasks,
+        'done_count': completed_tasks
+    })
+
+@login_required(login_url='/')
+def mark_done(request, wid):
+    work = get_object_or_404(workAssignments, id=wid)
+    if work.taskerId.eID == request.user.username:
+        work.isDone = True
+        work.save()
+        messages.success(request, "Marked as done.")
+    else:
+        messages.error(request, "You cannot mark this task.")
+    return redirect('/ems/mywork')
+
 @login_required(login_url='/')
 def attendance(request):
     attendance=Attendance.objects.filter(eId=request.user.username)
@@ -114,3 +166,23 @@ def updatework(request,wid):
             flag = "Work Updated Successfully!!"
             form.save()
     return render(request,"employee/updatework.html", {'currentWork': work, "filledForm": form, "flag":flag})
+
+
+from django.db.models import Q
+
+
+@login_required(login_url='/')
+@only_director
+def director_dashboard(request):
+    query = request.GET.get('q', '')
+    if query:
+        employees = Employee.objects.filter(
+            Q(firstName__icontains=query) |
+            Q(lastName__icontains=query) |
+            Q(middleName__icontains=query) |
+            Q(designation__icontains=query)
+        )
+    else:
+        employees = Employee.objects.all()
+
+    return render(request, "employee/director_dashboard.html", {"employees": employees, "query": query})

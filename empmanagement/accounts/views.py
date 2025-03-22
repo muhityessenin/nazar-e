@@ -32,22 +32,45 @@ def signup(request):
         id = request.POST["id"]
         password = request.POST["password"]
         cnfpass = request.POST["cnfpass"]
-        
+
+        # Дополнительные поля для сотрудника
+        firstName = request.POST["firstName"]
+        middleName = request.POST.get("middleName", "")
+        lastName = request.POST["lastName"]
+        phoneNo = request.POST["phoneNo"]
+        email = request.POST["email"]
+        addharNo = request.POST["addharNo"]
+        dOB = request.POST["dOB"]
+        designation = request.POST["designation"]
+        salary = request.POST["salary"]
+        joinDate = request.POST["joinDate"]
+
         if password == cnfpass:
-            if(Employee.objects.filter(eID=id).exists()):
-                if(User.objects.filter(username=id).exists()):
-                    messages.info(request,"Employee Already Registered")
-                    return redirect("/signup")
-                else:
-                    user = User.objects.create_user(username=id,password=password)
-                    user.save()
-                    messages.info(request,"Registered Successfully")
-                    return redirect("/signup")
+            if User.objects.filter(username=id).exists():
+                messages.info(request, "Employee Already Registered")
+                return redirect("/signup")
             else:
-                messages.info(request,"Invalid Employee")
+                # Создаем нового пользователя
+                user = User.objects.create_user(username=id, password=password)
+                user.save()
+                # Создаем новую запись сотрудника
+                Employee.objects.create(
+                    eID=id,
+                    firstName=firstName,
+                    middleName=middleName,
+                    lastName=lastName,
+                    phoneNo=phoneNo,
+                    email=email,
+                    addharNo=addharNo,
+                    dOB=dOB,
+                    designation=designation,
+                    salary=salary,
+                    joinDate=joinDate
+                )
+                messages.info(request, "Registered Successfully")
                 return redirect("/signup")
         else:
-            messages.info(request,"Password Doesn't Match")
+            messages.info(request, "Password Doesn't Match")
             return redirect("/signup")
-            
-    return render(request,"employee/signup.html")
+
+    return render(request, "employee/signup.html")

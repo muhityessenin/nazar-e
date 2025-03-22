@@ -22,4 +22,6 @@ urlpatterns = [
     path('makeRequest',views.makeRequest,name="makeRequest"),
     path('viewRequest',views.viewRequest,name="viewRequest"),
     path('requestdetails/?P<rid>/',views.requestdetails,name="requestdetails"),
+    path('director/', views.director_dashboard, name='director_dashboard'),
+    path('ems/markdone/<str:wid>/', views.mark_done, name='mark_done'),
 ]

@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'empmanagement.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'empdb',
+        'NAME': 'emp',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': 'muhit9845',
         'HOST': 'localhost',
     }
 }

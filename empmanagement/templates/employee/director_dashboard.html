@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="home">
+    <div class="text">Панель Директора</div>
+
+    <form method="get" class="mb-4">
+        <input type="text" name="q" placeholder="Поиск по имени или должности"
+               value="{{ query }}" class="border p-2 w-1/2 rounded"/>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Найти</button>
+    </form>
+
+    {% if employees %}
+{% for item in employees %}
+{% with emp=item.employee %}
+<div class="my-6 border border-gray-300 rounded-lg p-4 bg-white shadow">
+    <h2 class="text-xl font-bold mb-2 text-blue-700">{{ emp.firstName }}</h2>
+    <table class="min-w-full">
+        <tbody>
+            <tr class="border-b"><td class="font-semibold">ID Сотрудника:</td><td>{{ emp.eID }}</td></tr>
+            <tr class="border-b"><td class="font-semibold">Имя:</td><td>{{ emp.firstName }}</td></tr>
+            <tr class="border-b"><td class="font-semibold">Должность:</td><td>{{ emp.designation }}</td></tr>
+            <!-- 👉 Добавим задачи -->
+            <tr class="border-b"><td class="font-semibold text-green-700">Назначено задач:</td><td>{{ item.assigned }}</td></tr>
+            <tr class="border-b"><td class="font-semibold text-green-700">Выполнено задач:</td><td>{{ item.done }}</td></tr>
+        </tbody>
+    </table>
+</div>
+{% endwith %}
+{% endfor %}
+
+    {% else %}
+        <p class="text-gray-500 mt-4">Сотрудники не найдены.</p>
+    {% endif %}
+</section>
+{% endblock %}

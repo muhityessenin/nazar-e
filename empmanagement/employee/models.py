@@ -76,7 +76,10 @@ class workAssignments(models.Model):
     work = models.TextField()
     assignDate = models.DateTimeField()
     dueDate = models.DateTimeField()
-    taskerId = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name="taskerId") 
+    taskerId = models.ForeignKey(Employee,on_delete=models.CASCADE,related_name="taskerId")
+    isDone = models.BooleanField(default=False)
+    def __str__(self):
+        return f"{self.Id} - {self.taskerId} - {self.work[:20]}"
 
 class Requests(models.Model):
     Id = models.CharField(max_length=20)
